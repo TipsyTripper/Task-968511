@@ -16,8 +16,6 @@ public class TruncatedSphere extends Figure {
         super(coords);
     }
 
-    public boolean check;
-
     public boolean checkOfValid() {
         if (coords != null && coords.size() == 3) {
             Point centre = (Point) coords.get(0);
@@ -34,7 +32,7 @@ public class TruncatedSphere extends Figure {
         return false;
     }
 
-    public void areaOfFigure() {
+    public double areaOfFigure() {
         Point centre = (Point) coords.get(0);
         Point slice = (Point) coords.get(2);
         Point underCentre = new Point(centre.getCoordinateX(), slice.getCoordinateY(), centre.getCoordinateZ());
@@ -43,5 +41,7 @@ public class TruncatedSphere extends Figure {
         double ar = 2 * PI * lengthOf * high;
 
         System.out.printf("The figure area is %.2f\n", ar);
+
+        return ar;
     }
 }

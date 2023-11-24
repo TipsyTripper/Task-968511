@@ -28,11 +28,13 @@ public class Cone extends Figure {
         return false;
     }
 
-    public void areaOfFigure() {
+    public double areaOfFigure() {
         double rad1 = VeryImportantMaths.strangerLength((Point)coords.get(0), (Point)coords.get(1));
 
         double ar = 2 * PI * rad1 * (VeryImportantMaths.strangerLength((Point)coords.get(1), (Point)coords.get(2)) + rad1);
 
         System.out.printf("The figure area is %.2f\n", ar);
+
+        return ar;
     }
 }

@@ -13,6 +13,7 @@ public class Sphere extends Figure {
 
     public Sphere(ArrayList<Object> coords) {
         super(coords);
+        this.coords = coords;
     }
 
     public boolean checkOfValid() {
@@ -24,8 +25,9 @@ public class Sphere extends Figure {
         System.out.println("The figure is invalid");
         return false;
     }
-    public void areaOfFigure() {
+    public double areaOfFigure() {
         double ar = Consts.FOUR * PI * Math.pow(lengthOf, 2);
         System.out.printf("The figure area is %.2f\n", ar);
+        return ar;
     }
 }

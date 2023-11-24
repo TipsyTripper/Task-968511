@@ -28,7 +28,7 @@ public class Cylinder extends Figure {
         return false;
     }
 
-    public void areaOfFigure() {
+    public double areaOfFigure() {
         double ar = 0;
 
         double rad1 = VeryImportantMaths.strangerLength((Point)coords.get(0), (Point)coords.get(2));
@@ -41,5 +41,7 @@ public class Cylinder extends Figure {
         }
 
         System.out.printf("The figure area is %.2f\n", ar);
+
+        return ar;
     }
 }

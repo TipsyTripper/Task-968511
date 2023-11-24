@@ -48,13 +48,17 @@ public class Square extends Figure {
         return false;
     }
 
-    public void perimetr() {
+    public double perimetr() {
         double per = side * Consts.FOUR;
         System.out.printf("The figure perimetr is %.2f\n", per);
+
+        return per;
     }
 
-    public void areaOfFigure() {
+    public double areaOfFigure() {
         double ar = Math.pow(side, 2);
         System.out.printf("The figure area is %.2f\n", ar);
+
+        return ar;
     }
 }

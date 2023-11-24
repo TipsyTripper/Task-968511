@@ -62,14 +62,15 @@ public class Rectangle extends Figure {
         return false;
     }
 
-    public void areaOfFigure() {
+    public double areaOfFigure() {
         double a = VeryImportantMaths.strangerLength((Point)coords.get(0), (Point)coords.get(2));
         double b = VeryImportantMaths.strangerLength((Point)coords.get(0), (Point)coords.get(3));
 
         double ar = a * b;
         System.out.printf("The figure area is %.2f\n", ar);
+        return ar;
     }
-    public void perimetr() {
+    public double perimetr() {
         double a = VeryImportantMaths.strangerLength((Point)coords.get(0), (Point)coords.get(2));
         double b = VeryImportantMaths.strangerLength((Point)coords.get(0), (Point)coords.get(3));
         double c = VeryImportantMaths.strangerLength((Point)coords.get(1), (Point)coords.get(2));
@@ -77,5 +78,7 @@ public class Rectangle extends Figure {
 
         double per = a + b + c + d;
         System.out.printf("The figure perimetr is %.2f\n", per);
+
+        return per;
     }
 }

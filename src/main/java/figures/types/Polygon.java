@@ -20,8 +20,6 @@ public class Polygon extends Figure {
         this.coords = coords;
     }
 
-    public boolean check;
-
     public boolean checkOfValid() {
         if (coords != null && coords.size() > 2) {
             whichIsLefterAndHigher();
@@ -49,7 +47,6 @@ public class Polygon extends Figure {
             }
 
             System.out.println("The figure is valid");
-            check = true;
             return true;
         }
 
@@ -102,25 +99,24 @@ public class Polygon extends Figure {
 
     }
 
-    public void perimetr() {
-        if (check) {
-            Point special1 = (Point) coordsIdStack.peek();
-            double per = VeryImportantMaths.strangerLength(special1, mainPoint);;
-            Point special2 = new Point(0, 0, 0);
+    public double perimetr() {
+        Point special1 = (Point) coordsIdStack.peek();
+        double per = VeryImportantMaths.strangerLength(special1, mainPoint);;
+        Point special2 = new Point(0, 0, 0);
 
-            for (int t = 0; t < coordsIdStack.size(); ++t) {
-                special1 = (Point) coordsIdStack.pop();
-                special2 = (Point) coordsIdStack.peek();
+        for (int t = 0; t < coordsIdStack.size(); ++t) {
+            special1 = (Point) coordsIdStack.pop();
+            special2 = (Point) coordsIdStack.peek();
 
-                per += VeryImportantMaths.strangerLength(special1, special2);
-            }
-            per += VeryImportantMaths.strangerLength(mainPoint, special2);
-
-            System.out.printf("The figure perimetr is %.2f\n", per);
+            per += VeryImportantMaths.strangerLength(special1, special2);
         }
+        per += VeryImportantMaths.strangerLength(mainPoint, special2);
+
+        System.out.printf("The figure perimetr is %.2f\n", per);
+        return per;
     }
 
-    public void areaOfFigure() {
+    public double areaOfFigure() {
         double ar = 0;
         Point special;
 
@@ -134,6 +130,8 @@ public class Polygon extends Figure {
         }
 
         System.out.printf("The figure area is %.2f\n", ar);
+
+        return ar;
     }
 
 }

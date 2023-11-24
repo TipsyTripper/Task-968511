@@ -46,15 +46,15 @@ public class Parallelogram extends Figure {
         return pole.checkOfValid();
     }
 
-    public void perimetr() {
-        pole.perimetr();
+    public double perimetr() {
+        return pole.perimetr();
     }
 
-    public void areaOfFigure() {
-        pole.areaOfFigure();
+    public double areaOfFigure() {
+        return pole.areaOfFigure();
     }
 
-    public void whichIsLefterAndHigher() {
+    private void whichIsLefterAndHigher() {
         int indexOfHigherY = 0;
         int lefterX = Consts.DEVIL_MAX;
         int higherY;
