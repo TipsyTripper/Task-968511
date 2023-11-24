@@ -1,0 +1,156 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+Main : + {static} main(String[]) : void
+
+Figure : + checkOfValid() : boolean
+Figure : + getArea() : double
+Figure : + getPerimeter() : double
+
+class Circle {
+    - coords : ArrayList<Object>
+    + checkOfValid() : boolean
+    + getArea() : double
+    + getPerimeter() : double
+}
+
+class Sphere {
+    - coords : ArrayList<Object>
+    - length : double
+    + checkOfValid() : boolean
+    + getArea() : double
+    + getPerimeter() : double
+}
+
+class Cone {
+    - coords : ArrayList<Object>
+    + checkOfValid() : boolean
+    + getArea() : double
+    + getPerimeter() : double
+}
+
+class Cylinder {
+    - coords : ArrayList<Object>
+    + checkOfValid() : boolean
+    + getArea() : double
+}
+
+class Parallelogram {
+    - coords : ArrayList<Object>
+    - coordsIdStack : Stack<Object>
+    - indexOfLefterX : int
+    - pole : Polygon
+    + checkOfValid() : boolean
+    + getArea() : double
+    + getPerimeter() : double
+    - whichIsLefterAndHigher() : void
+}
+
+class Polygon {
+    - coords : ArrayList<Object>
+    - coordsIdStack : Stack<Object>
+    - coordsIdStack2 : Stack<Object>
+    - indexOfLefterX : int
+    - mainPoint : Point
+     + checkOfValid() : boolean
+    - whichIsLefterAndHigher() : void
+     + getArea() : double
+     + getPerimeter() : double
+}
+
+class Rectangle {
+    - coords : ArrayList<Object>
+    - theRightCoords : ArrayList<Object>
+    - pole : Polygon
+    + checkOfValid() : boolean
+    + getArea() : double
+    + getPerimeter() : double
+}
+
+class Sphere {
+    - coords : ArrayList<Object>
+    - length : double
+    + checkOfValid() : boolean
+    + getArea() : double
+}
+
+class Square {
+    - coords : ArrayList<Object>
+    - side : double
+    - pole : Polygon
+    + checkOfValid() : boolean
+    + getArea() : double
+    + getPerimeter() : double
+}
+
+class Triangle {
+    - coords : ArrayList<Object>
+    + checkOfValid() : boolean
+    + getArea() : double
+    + getPerimeter() : double
+}
+
+class TruncatedSphere {
+    - coords : ArrayList<Object>
+    - length : double
+    + checkOfValid() : boolean
+    + getArea() : double
+}
+
+interface Consts {
+    - FOUR : int
+    - DEVIL_MAX : int
+}
+
+class VeryImportantMaths {
+    + strangerLength(ArrayList<Object>) : double
+    + strangerLength(Point point1, Point point2) : double
+    + vectorMulty(Point vector1, Point vector2) : double
+    + vectorMaker(Point point1, Point point2) : Point
+    + rectangular(Point pMain, Point pSec, Point pThird) : Point
+}
+
+class Point {
+    - x : int
+    - y : int
+    - z : int
+}
+
+Main <.. Figure
+Main <.. Point
+
+Figure <|-- Circle
+Figure <|-- Cone
+Figure <|-- Cylinder
+Figure <|-- Parallelogram
+Figure <|-- Polygon
+Figure <|-- Rectangle
+Figure <|-- Sphere
+Figure <|-- Square
+Figure <|-- Triangle
+Figure <|-- TruncatedSphere
+
+Figure *-- Point
+Circle *-- Point
+Cone *-- Point
+Cylinder *-- Point
+Parallelogram *-- Point
+Polygon <.. Point
+Rectangle *-- Point
+Sphere *-- Point
+Square *-- Point
+Triangle *-- Point
+TruncatedSphere *-- Point
+
+Parallelogram <-- Consts
+Polygon <-- Consts
+Sphere <-- Consts
+Square <-- Consts
+
+Polygon o-- VeryImportantMaths
+Triangle o-- VeryImportantMaths
+Cone o-- VeryImportantMaths
+Cylinder o-- VeryImportantMaths
+Rectangle o-- VeryImportantMaths
+
+@enduml
