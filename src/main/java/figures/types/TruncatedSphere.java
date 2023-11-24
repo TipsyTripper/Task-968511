@@ -14,6 +14,7 @@ public class TruncatedSphere extends Figure {
 
     public TruncatedSphere(ArrayList<Object> coords) {
         super(coords);
+        this.coords = coords;
     }
 
     public boolean checkOfValid() {
