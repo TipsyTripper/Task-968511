@@ -18,12 +18,9 @@ public class Parallelogram extends Polygon {
         this.coords = coords;
     }
 
-    private static Polygon pole = null;
-
     @Override
     public boolean checkOfValid() {
         if (coords != null && coords.size() == 4) {
-            pole = new Polygon(coords);
             whichIsLefterAndHigher();
 
             Point theMain = (Point)coords.get(indexOfLefterX);

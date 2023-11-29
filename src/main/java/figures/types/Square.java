@@ -6,11 +6,10 @@ import figures.consts.Consts;
 
 import java.util.ArrayList;
 
-public class Square extends Figure {
+public class Square extends Polygon {
 
     private static ArrayList<Object> coords;
     private static double side;
-    private static Polygon pole;
 
     public Square(ArrayList<Object> coords) {
         super(coords);
@@ -38,13 +37,8 @@ public class Square extends Figure {
                 }
             }
 
-            if (lengthMin > lengthMax) {
-                side = lengthMax;
-            } else {
-                side = lengthMin;
-            }
-            pole = new Polygon(coords);
-            return pole.checkOfValid();
+            side = Math.min(lengthMin, lengthMax);
+            return super.checkOfValid();
         }
         System.out.println("The figure is invalid");
         return false;
