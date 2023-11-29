@@ -15,6 +15,7 @@ public class Cylinder extends Figure {
         this.coords = coords;
     }
 
+    @Override
     public boolean checkOfValid() {
         if (coords != null && coords.size() == 3) {
 
@@ -28,6 +29,7 @@ public class Cylinder extends Figure {
         return false;
     }
 
+    @Override
     public double areaOfFigure() {
         double ar = 0;
 

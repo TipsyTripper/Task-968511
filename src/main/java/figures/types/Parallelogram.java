@@ -2,11 +2,12 @@ package figures.types;
 
 import figures.auxiliary.Point;
 import figures.auxiliary.VeryImportantMaths;
+import figures.consts.Consts;
 
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class Parallelogram extends Figure {
+public class Parallelogram extends Polygon {
 
     private static ArrayList<Object> coords;
     private static final Stack<Object> coordsIdStack = new Stack<>();
@@ -19,6 +20,7 @@ public class Parallelogram extends Figure {
 
     private static Polygon pole = null;
 
+    @Override
     public boolean checkOfValid() {
         if (coords != null && coords.size() == 4) {
             pole = new Polygon(coords);
@@ -43,18 +45,11 @@ public class Parallelogram extends Figure {
             }
         }
 
-        return pole.checkOfValid();
+        return super.checkOfValid();
     }
 
-    public double perimetr() {
-        return pole.perimetr();
-    }
-
-    public double areaOfFigure() {
-        return pole.areaOfFigure();
-    }
-
-    private void whichIsLefterAndHigher() {
+    @Override
+    public void whichIsLefterAndHigher() {
         int indexOfHigherY = 0;
         int lefterX = Consts.DEVIL_MAX;
         int higherY;

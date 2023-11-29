@@ -1,6 +1,7 @@
 package figures.types;
 
 import figures.auxiliary.VeryImportantMaths;
+import figures.consts.Consts;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,7 @@ public class Sphere extends Figure {
         this.coords = coords;
     }
 
+    @Override
     public boolean checkOfValid() {
         if (coords != null && coords.size() == 2) {
             System.out.println("The figure is valid");
@@ -25,6 +27,7 @@ public class Sphere extends Figure {
         System.out.println("The figure is invalid");
         return false;
     }
+    @Override
     public double areaOfFigure() {
         double ar = Consts.FOUR * PI * Math.pow(lengthOf, 2);
         System.out.printf("The figure area is %.2f\n", ar);

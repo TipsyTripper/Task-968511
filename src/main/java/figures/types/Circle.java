@@ -25,12 +25,14 @@ public class Circle extends Figure {
         return false;
     }
 
+    @Override
     public double perimetr() {
         double per = lengthOf * PI * 2;
         System.out.printf("The figure perimetr is %.2f\n", per);
 
         return per;
     }
+    @Override
     public double areaOfFigure() {
         double ar = PI * Math.pow(lengthOf, 2);
         System.out.printf("The figure area is %.2f\n", ar);

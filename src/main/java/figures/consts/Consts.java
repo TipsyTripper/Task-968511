@@ -1,4 +1,4 @@
-package figures.types;
+package figures.consts;
 
 public interface Consts {
     int FOUR = 4;

@@ -2,6 +2,7 @@ package figures.types;
 
 import figures.auxiliary.Point;
 import figures.auxiliary.VeryImportantMaths;
+import figures.consts.Consts;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -20,6 +21,7 @@ public class Polygon extends Figure {
         this.coords = coords;
     }
 
+    @Override
     public boolean checkOfValid() {
         if (coords != null && coords.size() > 2) {
             whichIsLefterAndHigher();
@@ -99,6 +101,7 @@ public class Polygon extends Figure {
 
     }
 
+    @Override
     public double perimetr() {
         Point special1 = (Point) coordsIdStack.peek();
         double per = VeryImportantMaths.strangerLength(special1, mainPoint);;
@@ -116,6 +119,7 @@ public class Polygon extends Figure {
         return per;
     }
 
+    @Override
     public double areaOfFigure() {
         double ar = 0;
         Point special;

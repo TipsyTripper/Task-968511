@@ -2,6 +2,7 @@ package figures.types;
 
 import figures.auxiliary.Point;
 import figures.auxiliary.VeryImportantMaths;
+import figures.consts.Consts;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,7 @@ public class Square extends Figure {
         this.coords = coords;
     }
 
+    @Override
     public boolean checkOfValid() {
         if (coords != null && coords.size() == 4) {
             double lengthMin = 0;
@@ -48,6 +50,7 @@ public class Square extends Figure {
         return false;
     }
 
+    @Override
     public double perimetr() {
         double per = side * Consts.FOUR;
         System.out.printf("The figure perimetr is %.2f\n", per);
@@ -55,6 +58,7 @@ public class Square extends Figure {
         return per;
     }
 
+    @Override
     public double areaOfFigure() {
         double ar = Math.pow(side, 2);
         System.out.printf("The figure area is %.2f\n", ar);

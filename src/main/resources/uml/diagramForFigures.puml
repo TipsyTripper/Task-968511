@@ -122,13 +122,14 @@ Main <.. Point
 Figure <|-- Circle
 Figure <|-- Cone
 Figure <|-- Cylinder
-Figure <|-- Parallelogram
 Figure <|-- Polygon
 Figure <|-- Rectangle
 Figure <|-- Sphere
 Figure <|-- Square
 Figure <|-- Triangle
 Figure <|-- TruncatedSphere
+
+Polygon <|-- Parallelogram
 
 Figure *-- Point
 Circle *-- Point

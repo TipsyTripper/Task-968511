@@ -15,6 +15,7 @@ public class Rectangle extends Figure {
         this.coords = coords;
     }
 
+    @Override
     public boolean checkOfValid() {
         if (coords != null && coords.size() == 4) {
             int indexMainPoint = 0;
@@ -62,6 +63,7 @@ public class Rectangle extends Figure {
         return false;
     }
 
+    @Override
     public double areaOfFigure() {
         double a = VeryImportantMaths.strangerLength((Point)coords.get(0), (Point)coords.get(2));
         double b = VeryImportantMaths.strangerLength((Point)coords.get(0), (Point)coords.get(3));
@@ -70,6 +72,7 @@ public class Rectangle extends Figure {
         System.out.printf("The figure area is %.2f\n", ar);
         return ar;
     }
+    @Override
     public double perimetr() {
         double a = VeryImportantMaths.strangerLength((Point)coords.get(0), (Point)coords.get(2));
         double b = VeryImportantMaths.strangerLength((Point)coords.get(0), (Point)coords.get(3));

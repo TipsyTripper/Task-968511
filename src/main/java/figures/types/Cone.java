@@ -15,6 +15,7 @@ public class Cone extends Figure {
         this.coords = coords;
     }
 
+    @Override
     public boolean checkOfValid() {
         if (coords != null && coords.size() == 3) {
 
@@ -28,6 +29,7 @@ public class Cone extends Figure {
         return false;
     }
 
+    @Override
     public double areaOfFigure() {
         double rad1 = VeryImportantMaths.strangerLength((Point)coords.get(0), (Point)coords.get(1));
 
