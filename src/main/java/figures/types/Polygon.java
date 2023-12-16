@@ -9,11 +9,13 @@ import java.util.Stack;
 
 public class Polygon extends Figure {
 
-    private static ArrayList<Object> coords;
-    private static Stack<Object> coordsIdStack = new Stack<>();
-    private static Stack<Object> coordsIdStack2 = new Stack<>();
+    private ArrayList<Object> coords;
+    protected final Stack<Object> coordsIdStack = new Stack<>();
+    protected Stack<Object> coordsIdStack2 = new Stack<>();
     private static int indexOfLefterX = 0;
     private static Point mainPoint;
+
+    private static boolean check = false;
 
 
     public Polygon(ArrayList<Object> coords) {
@@ -24,11 +26,30 @@ public class Polygon extends Figure {
     @Override
     public boolean checkOfValid() {
         if (coords != null && coords.size() > 2) {
-            whichIsLefterAndHigher();
+            coords = coordsReplace();
 
-            mainPoint = (Point) coords.get(indexOfLefterX);
-            Point theSeconds = (Point) coords.get(0);
-            Point theThird = (Point) coords.get(1);
+            if (!whichIsLefterAndHigher()) {
+                System.out.println("The figure is invalid");
+                return false;
+            }
+
+            for (int t = 0; t < coords.size(); ++t) {
+                Point a = (Point)coords.get(t);
+                for (int m = 0; m < coords.size(); ++m) {
+                    if(m != t) {
+                        Point b = (Point)coords.get(m);
+                        int equals = (int)VeryImportantMaths.strangerLength(a, b);
+                        if (equals == 0) {
+                            System.out.println("The figure is invalid");
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            mainPoint = (Point)coords.get(indexOfLefterX);
+            Point theSeconds = (Point)coords.get(0);
+            Point theThird = (Point)coords.get(1);
 
             Point mainVector = new Point(theSeconds.getCoordinateX() - mainPoint.getCoordinateX(), theSeconds.getCoordinateY() - mainPoint.getCoordinateY(), theSeconds.getCoordinateZ() - mainPoint.getCoordinateZ());
             Point secondMainVector = new Point(theThird.getCoordinateX() - mainPoint.getCoordinateX(), theThird.getCoordinateY() - mainPoint.getCoordinateY(), theThird.getCoordinateZ() - mainPoint.getCoordinateZ());
@@ -38,10 +59,16 @@ public class Polygon extends Figure {
                     Point otherPoint = (Point) coords.get(t);
                     Point otherVector = VeryImportantMaths.vectorMaker(otherPoint, mainPoint);
 
-                    int rez1 = mainVector.getCoordinateX() * secondMainVector.getCoordinateY() * otherVector.getCoordinateZ() + mainVector.getCoordinateY() * secondMainVector.getCoordinateZ() * otherVector.getCoordinateX() + mainVector.getCoordinateZ() * secondMainVector.getCoordinateX() * otherVector.getCoordinateY();
-                    int rez2 = - mainVector.getCoordinateZ() * secondMainVector.getCoordinateY() * otherVector.getCoordinateX() - mainVector.getCoordinateY() * secondMainVector.getCoordinateX() * otherVector.getCoordinateZ() + mainVector.getCoordinateX() * secondMainVector.getCoordinateZ() * otherVector.getCoordinateY();
+                    int plusD123 = mainVector.getCoordinateX() * secondMainVector.getCoordinateY() * otherVector.getCoordinateZ();
+                    int plusStar1 = mainVector.getCoordinateY() * secondMainVector.getCoordinateZ() * otherVector.getCoordinateX();
+                    int plusStar2 = mainVector.getCoordinateZ() * secondMainVector.getCoordinateX() * otherVector.getCoordinateY();
+                    int plus = plusD123 + plusStar1 + plusStar2;
+                    int minusD123 = mainVector.getCoordinateZ() * secondMainVector.getCoordinateY() * otherVector.getCoordinateX();
+                    int minusStar1 = mainVector.getCoordinateY() * secondMainVector.getCoordinateX() * otherVector.getCoordinateZ();
+                    int minusStar2 = mainVector.getCoordinateX() * secondMainVector.getCoordinateZ() * otherVector.getCoordinateY();
+                    int minus = - minusD123 - minusStar1 - minusStar2;
 
-                    if (rez1 + rez2 != 0) {
+                    if (plus + minus != 0) {
                         System.out.println("The figure is invalid");
                         return false;
                     }
@@ -49,6 +76,7 @@ public class Polygon extends Figure {
             }
 
             System.out.println("The figure is valid");
+            check = true;
             return true;
         }
 
@@ -56,11 +84,9 @@ public class Polygon extends Figure {
         return false;
     }
 
-    public void whichIsLefterAndHigher() {
-        int indexOfHigherY = 0;
-        int lefterX = Consts.DEVIL_MAX;
+    public boolean whichIsLefterAndHigher() {
         int higherY;
-
+        int lefterX = Consts.DEVIL_MAX;
         for (int t = 0; t < coords.size(); ++t) {
             Point point = (Point) coords.get(t);
             if (point.getCoordinateX() < lefterX) {
@@ -70,72 +96,114 @@ public class Polygon extends Figure {
         }
 
         ArrayList<Object> coordsForHigher = new ArrayList<>(coords);
+        coordsForHigher.remove(indexOfLefterX);
 
-        while (coordsIdStack.size() != coords.size() - 1) {
+        int indexOfHigherY = 0;
+        int size = coords.size() - 1;
+        for (int n = 0; n < size; ++n) {
             int xOfHigherY = Consts.DEVIL_MAX;
             higherY = -Consts.DEVIL_MAX;
-            for (int t = 0; t < coordsForHigher.size() - 1; ++t) {
-                Point point = (Point) coordsForHigher.get(t);
-                if (point.getCoordinateY() > higherY && t != indexOfLefterX) {
-                    higherY = point.getCoordinateY();
+            for (int t = 0; t < coordsForHigher.size(); ++t) {
+                Point higherPointHere = (Point)coordsForHigher.get(t);
+                int yHere = higherPointHere.getCoordinateY();
+                int xHere = higherPointHere.getCoordinateX();
+                if (yHere > higherY) {
+                    higherY = yHere;
                     indexOfHigherY = t;
-                    xOfHigherY = point.getCoordinateX();
+                    xOfHigherY = xHere;
                 }
-
             }
 
             for (int m = 0; m < coordsForHigher.size(); ++m) {
-                Point point2 = (Point) coordsForHigher.get(m);
-                if (point2.getCoordinateY() == higherY && xOfHigherY < point2.getCoordinateX()) {
-                    higherY = point2.getCoordinateY();
+                Point lefterAndHigherPointHere = (Point) coordsForHigher.get(m);
+                int yHere = lefterAndHigherPointHere.getCoordinateY();
+                int xHere = lefterAndHigherPointHere.getCoordinateX();
+                Point mainPoint = (Point) coords.get(indexOfLefterX);
+                if (yHere == higherY && xHere < xOfHigherY && yHere > mainPoint.getCoordinateY()) {
+                    higherY = yHere;
                     indexOfHigherY = m;
-                    xOfHigherY = point2.getCoordinateX();
+                    xOfHigherY = xHere;
+                } else if (yHere == higherY && xHere > xOfHigherY && yHere <= mainPoint.getCoordinateY()) {
+                    higherY = yHere;
+                    indexOfHigherY = m;
+                    xOfHigherY = xHere;
                 }
-
             }
 
             coordsIdStack.push(coordsForHigher.get(indexOfHigherY));
             coordsIdStack2.push(coordsForHigher.get(indexOfHigherY));
             coordsForHigher.remove(indexOfHigherY);
         }
-
+        return true;
     }
 
     @Override
     public double perimetr() {
-        Point special1 = (Point) coordsIdStack.peek();
-        double per = VeryImportantMaths.strangerLength(special1, mainPoint);;
-        Point special2 = new Point(0, 0, 0);
+        if (check) {
+            Point special1 = (Point) coordsIdStack.peek();
+            double per = VeryImportantMaths.strangerLength(special1, mainPoint);
 
-        for (int t = 0; t < coordsIdStack.size(); ++t) {
-            special1 = (Point) coordsIdStack.pop();
-            special2 = (Point) coordsIdStack.peek();
+            Point special2 = new Point(0, 0, 0);
 
-            per += VeryImportantMaths.strangerLength(special1, special2);
+            for (int t = 0; t < coordsIdStack.size(); ++t) {
+                special1 = (Point)coordsIdStack.pop();
+                special2 = (Point)coordsIdStack.peek();
+
+                per += VeryImportantMaths.strangerLength(special1, special2);
+            }
+            per += VeryImportantMaths.strangerLength(mainPoint, special2);
+
+            System.out.printf("The figure perimetr is %.2f\n", per);
+            return per;
         }
-        per += VeryImportantMaths.strangerLength(mainPoint, special2);
 
-        System.out.printf("The figure perimetr is %.2f\n", per);
-        return per;
+        return super.perimetr();
     }
 
     @Override
     public double areaOfFigure() {
-        double ar = 0;
-        Point special;
+        if (check) {
+            Point main = (Point) coords.get(indexOfLefterX);
+            double ar = 0;
+            while (coordsIdStack2.size() != 1) {
+                ArrayList<Object> triangleCoords = new ArrayList<>();
+                triangleCoords.add(main);
+                triangleCoords.add(coordsIdStack2.pop());
+                triangleCoords.add(coordsIdStack2.peek());
+                Triangle triangle = new Triangle(triangleCoords);
+                triangle.checkOfValid();
 
-        for (int t = 0; t < coords.size() - 2; ++t) {
-            special = (Point) coordsIdStack2.pop();
-            Point vector1 = VeryImportantMaths.vectorMaker(special, mainPoint);
-            special = (Point) coordsIdStack2.peek();
-            Point vector2 = VeryImportantMaths.vectorMaker(special, mainPoint);
+                ar += triangle.areaOfFigure();
+            }
 
-            ar += VeryImportantMaths.vectorMulty(vector1, vector2) / 2.00;
+            System.out.printf("The figure area is %.2f\n", ar);
+            return ar;
         }
 
-        System.out.printf("The figure area is %.2f\n", ar);
+        return super.areaOfFigure();
+    }
 
-        return ar;
+    private ArrayList<Object> coordsReplace() {
+        for (int t = 0; t < coords.size(); ++t) {
+            Point pointA = (Point)coords.get(t);
+            for (int m = 0; m < coords.size(); ++m) {
+                if(m != t) {
+                    Point pointB = (Point)coords.get(m);
+                    boolean zet = pointA.getCoordinateY() == pointB.getCoordinateY();
+                    boolean iks = pointA.getCoordinateX() == pointB.getCoordinateX();
+                    if (zet && iks) {
+                        ArrayList<Object> coords2 = new ArrayList<>();
+                        for (int i = 0; i < coords.size(); ++i) {
+                            pointA = (Point)coords.get(i);
+                            Point special = new Point(pointA.getCoordinateZ(), pointA.getCoordinateY(), pointA.getCoordinateX());
+                            coords2.add(special);
+                        }
+                        return coords2;
+                    }
+                }
+            }
+        }
+        return coords;
     }
 
 }

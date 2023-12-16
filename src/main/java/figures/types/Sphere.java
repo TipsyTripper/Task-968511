@@ -9,8 +9,10 @@ import static java.lang.Math.PI;
 
 public class Sphere extends Figure {
 
-    private static ArrayList<Object> coords;
+    private final ArrayList<Object> coords;
     private static double lengthOf;
+
+    private static boolean check = false;
 
     public Sphere(ArrayList<Object> coords) {
         super(coords);
@@ -22,6 +24,7 @@ public class Sphere extends Figure {
         if (coords != null && coords.size() == 2) {
             System.out.println("The figure is valid");
             lengthOf = VeryImportantMaths.strangerLength(coords);
+            check = true;
             return true;
         }
         System.out.println("The figure is invalid");
@@ -29,8 +32,12 @@ public class Sphere extends Figure {
     }
     @Override
     public double areaOfFigure() {
-        double ar = Consts.FOUR * PI * Math.pow(lengthOf, 2);
-        System.out.printf("The figure area is %.2f\n", ar);
-        return ar;
+        if (check) {
+            double ar = Consts.FOUR * PI * Math.pow(lengthOf, 2);
+            System.out.printf("The figure area is %.2f\n", ar);
+            return ar;
+        }
+
+        return super.areaOfFigure();
     }
 }

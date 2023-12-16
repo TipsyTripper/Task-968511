@@ -8,8 +8,10 @@ import java.util.ArrayList;
 
 public class Square extends Polygon {
 
-    private static ArrayList<Object> coords;
+    private final ArrayList<Object> coords;
     private static double side;
+
+    private static boolean check = false;
 
     public Square(ArrayList<Object> coords) {
         super(coords);
@@ -38,7 +40,8 @@ public class Square extends Polygon {
             }
 
             side = Math.min(lengthMin, lengthMax);
-            return super.checkOfValid();
+            check = super.checkOfValid();
+            return check;
         }
         System.out.println("The figure is invalid");
         return false;
@@ -46,17 +49,24 @@ public class Square extends Polygon {
 
     @Override
     public double perimetr() {
-        double per = side * Consts.FOUR;
-        System.out.printf("The figure perimetr is %.2f\n", per);
+        if (check) {
+            double per = side * Consts.FOUR;
+            System.out.printf("The figure perimetr is %.2f\n", per);
 
-        return per;
+            return per;
+        }
+        return super.perimetr();
     }
 
     @Override
     public double areaOfFigure() {
-        double ar = Math.pow(side, 2);
-        System.out.printf("The figure area is %.2f\n", ar);
+        if (check) {
+            double ar = Math.pow(side, 2);
+            System.out.printf("The figure area is %.2f\n", ar);
 
-        return ar;
+            return ar;
+        }
+
+        return super.areaOfFigure();
     }
 }

@@ -9,8 +9,10 @@ import static java.lang.Math.PI;
 
 public class TruncatedSphere extends Figure {
 
-    private static ArrayList<Object> coords;
+    private final ArrayList<Object> coords;
     private static double lengthOf;
+
+    private static boolean check = false;
 
     public TruncatedSphere(ArrayList<Object> coords) {
         super(coords);
@@ -26,6 +28,7 @@ public class TruncatedSphere extends Figure {
             lengthOf = VeryImportantMaths.strangerLength(centre, rad);
             if (lengthOf == VeryImportantMaths.strangerLength(centre, slice)) {
                 System.out.println("The figure is valid");
+                check = true;
                 return true;
             }
         }
@@ -34,15 +37,19 @@ public class TruncatedSphere extends Figure {
     }
 
     public double areaOfFigure() {
-        Point centre = (Point) coords.get(0);
-        Point slice = (Point) coords.get(2);
-        Point underCentre = new Point(centre.getCoordinateX(), slice.getCoordinateY(), centre.getCoordinateZ());
+        if (check) {
+            Point centre = (Point)coords.get(0);
+            Point slice = (Point)coords.get(2);
+            Point underCentre = new Point(centre.getCoordinateX(), slice.getCoordinateY(), centre.getCoordinateZ());
 
-        double high = VeryImportantMaths.strangerLength(underCentre, centre) + lengthOf;
-        double ar = 2 * PI * lengthOf * high;
+            double high = lengthOf - VeryImportantMaths.strangerLength(underCentre, centre);
+            double ar = 2 * PI * lengthOf * high;
 
-        System.out.printf("The figure area is %.2f\n", ar);
+            System.out.printf("The figure area is %.2f\n", ar);
 
-        return ar;
+            return ar;
+        }
+
+        return super.areaOfFigure();
     }
 }
