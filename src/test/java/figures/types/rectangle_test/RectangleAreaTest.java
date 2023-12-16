@@ -44,6 +44,6 @@ public class RectangleAreaTest {
         rectangle = new Rectangle(coords);
         rectangle.checkOfValid();
         String answer = String.format("%.2f", rectangle.areaOfFigure());
-        Assertions.assertEquals("20,00", answer);
+        Assertions.assertEquals("24,00", answer);
     }
 }

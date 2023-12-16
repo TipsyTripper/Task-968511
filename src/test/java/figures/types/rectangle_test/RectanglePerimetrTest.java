@@ -43,6 +43,6 @@ public class RectanglePerimetrTest {
         rectangle = new Rectangle(coords);
         rectangle.checkOfValid();
         String answer = String.format("%.2f", rectangle.perimetr());
-        Assertions.assertEquals("24,00", answer);
+        Assertions.assertEquals("20,00", answer);
     }
 }
